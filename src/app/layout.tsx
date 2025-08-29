@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Provider } from "@/components/ui/provider";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryProvider } from "./providers/queryProvider";
+
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -19,8 +20,6 @@ export const metadata: Metadata = {
   description: "A comprehensive overview of billing history.",
 };
 
-const queryClient = new QueryClient();
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -31,9 +30,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <QueryClientProvider client={queryClient}>
+        <QueryProvider>
           <Provider>{children}</Provider>
-        </QueryClientProvider>
+        </QueryProvider>
       </body>
     </html>
   );
